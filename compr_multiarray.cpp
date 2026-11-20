@@ -563,7 +563,8 @@ static int EncodeAdvMultiArray(uint8 *dst_in, uint8 *dst_end_in,
 
   float cost_total = 1.0f;
 
-  std::basic_string<uint8> tempstring;
+  // A vector, since libc++ has no std::char_traits<unsigned char> for std::basic_string<uint8>.
+  std::vector<uint8> tempstring;
   for (int i = 0; i != bpf_size; i++) {
     tempstring.clear();
 
@@ -571,7 +572,7 @@ static int EncodeAdvMultiArray(uint8 *dst_in, uint8 *dst_end_in,
     for (const auto &it : picked_ranges) {
       for (const auto &pear : it) {
         if (ranks[pear.best_histo] == i) {
-          tempstring.append(array_data[j] + pear.char_idx, pear.char_count);
+          tempstring.insert(tempstring.end(), array_data[j] + pear.char_idx, array_data[j] + pear.char_idx + pear.char_count);
         }
       }
       j++;
