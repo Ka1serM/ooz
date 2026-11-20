@@ -27,6 +27,7 @@ set(OOZ_SOURCES
     compress.cpp
     compress.h
     kraken.cpp
+    kraken_block_size.cpp
     log_lookup.h
     lzna.cpp
     match_hasher.h

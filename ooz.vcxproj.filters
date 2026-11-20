@@ -68,6 +68,9 @@
     <ClCompile Include="kraken.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="kraken_block_size.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="lzna.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

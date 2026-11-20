@@ -183,6 +183,7 @@
     <ClCompile Include="compr_multiarray.cpp" />
     <ClCompile Include="compr_tans.cpp" />
     <ClCompile Include="kraken.cpp" />
+    <ClCompile Include="kraken_block_size.cpp" />
     <ClCompile Include="lzna.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
