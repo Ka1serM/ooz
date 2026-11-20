@@ -783,7 +783,8 @@ void HuffBuilder::CalcNumsymsEtc() {
     min_len++;
   min_code_len_ = min_len;
 
-  int max_len = 31;
+  // numsyms_of_len_ has kMaxCodeLen entries; starting at 31 read past it and returned garbage lengths.
+  int max_len = kMaxCodeLen - 1;
   while (!numsyms_of_len_[max_len])
     max_len--;
   max_code_len_ = max_len;
@@ -880,12 +881,15 @@ void HuffBuilder::LimitCodeLensHeuristic(Entry *ents, const HistoU8 &histo, int 
     B[count - 1]--;
   }
 
-  uint max_code_len = ents[0].count;
-  uint min_code_len = ents[num_symbols - 1].count;
+  // The adjustments above can reorder the lengths, so ents[0] and ents[num_symbols - 1] are not always the longest and shortest.
+  uint max_code_len = 0;
+  uint min_code_len = ~0u;
   for (size_t i = 0; i != num_symbols; i++) {
     unsigned len = ents[i].count;
     sym2len_[ents[i].sym] = len;
     numsyms_of_len_[len]++;
+    max_code_len = std::max(max_code_len, len);
+    min_code_len = std::min(min_code_len, len);
   }
   max_code_len_ = max_code_len;
   min_code_len_ = min_code_len;
